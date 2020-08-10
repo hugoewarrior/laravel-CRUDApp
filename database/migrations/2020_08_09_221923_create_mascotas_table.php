@@ -22,7 +22,7 @@ class CreateMascotasTable extends Migration
             $table->string('owner');
             $table->timestamps();
             /* Constrains */
-            $table->foreign('owner')->references('email')->on('clientes');
+            $table->foreign('owner')->references('email')->on('users');
             
         });
     }

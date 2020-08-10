@@ -14,7 +14,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('pages.index');
+    return redirect('/mascotas');
 });
 
 Route::resource('mascotas', 'MascotasController'); 
+Route::get('/mismascotas', 'ClientesController@index');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

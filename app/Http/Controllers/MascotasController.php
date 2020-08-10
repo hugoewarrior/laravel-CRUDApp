@@ -7,6 +7,11 @@ use App\Mascota;
 
 class MascotasController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['index', 'show']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -45,8 +50,7 @@ class MascotasController extends Controller
         $mascota = new Mascota();
         $mascota->name = $request->input('name');
         $mascota->description = $request->input('description');
-        $mascota->owner = "jlopez_e41@udi.edu.pa";
-        //$mascota->user_id = auth()->user()->id;
+        $mascota->owner = auth()->user()->email;
         //$post->cover_image = $fileNameToStore;
         $mascota->save();
         return redirect('/mascotas')->with('success', 'Tu Mascota ha sido creada con éxito');
@@ -94,8 +98,7 @@ class MascotasController extends Controller
         $mascota = Mascota::find($id);
         $mascota->name = $request->input('name');
         $mascota->description = $request->input('description');
-        $mascota->owner = "jlopez_e41@udi.edu.pa";
-        //$mascota->user_id = auth()->user()->id;
+        $mascota->owner = auth()->user()->email;
         //$post->cover_image = $fileNameToStore;
         $mascota->save();
         return redirect('/mascotas')->with('success', 'Cambios efectuados con éxito');
